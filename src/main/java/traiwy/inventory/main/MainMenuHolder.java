@@ -19,7 +19,7 @@ public class MainMenuHolder implements InventoryHolder {
 
 
         final ItemStack grayPanel = new ItemStack(ConfigManager.Gui.GrayPanel.material);
-        final ItemStack orangePanel = new ItemStack(ConfigManager.Gui.GrayPanel.material);
+        final ItemStack orangePanel = new ItemStack(ConfigManager.Gui.OrangePanel.material);
         final ItemStack infoQuest = new ItemStack(ConfigManager.Gui.InfoQuestButtons.material);
 
 
@@ -38,16 +38,11 @@ public class MainMenuHolder implements InventoryHolder {
         infoQuestMeta.setLore(ConfigManager.Gui.InfoQuestButtons.lore);
         infoQuest.setItemMeta(infoQuestMeta);
 
-        for (Integer i : ConfigManager.Gui.GrayPanel.slots) {
-            inventory.setItem(i, grayPanel);
-        }
-
         for (Integer i : ConfigManager.Gui.OrangePanel.slots) {
             inventory.setItem(i, orangePanel);
         }
 
-        inventory.setItem(6, infoQuest);
-
+        inventory.setItem(ConfigManager.Gui.InfoQuestButtons.slot, infoQuest);
 
         return inventory;
     }

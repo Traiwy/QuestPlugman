@@ -29,9 +29,9 @@ gui:
     grayPanel:
       material: GRAY_STAINED_GLASS_PANE
       slots:
-        - 1
-        - 2
-        - 3
+        - 9
+        - 10
+        - 11
     orangePanel:
       material: ORANGE_STAINED_GLASS_PANE
       slots:

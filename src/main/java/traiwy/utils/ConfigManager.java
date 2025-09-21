@@ -24,24 +24,25 @@ public class ConfigManager {
         Gui.size = section.getInt("size");
 
         final ConfigurationSection infoQuestButtonsSection = config.getConfigurationSection("gui.buttons.info-quest");
-        isSectionIsNull(infoQuestButtonsSection, "gui.info-quest");
-        Gui.InfoQuestButtons.slot = infoQuestButtonsSection.getInt("size");
+        isSectionIsNull(infoQuestButtonsSection, "gui.buttons.info-quest");
+        Gui.InfoQuestButtons.slot = infoQuestButtonsSection.getInt("slot");
         Gui.InfoQuestButtons.material = Material.getMaterial(infoQuestButtonsSection.getString("material"));
         Gui.InfoQuestButtons.lore = infoQuestButtonsSection.getStringList("lore");
+        log.info("Предмет: " + infoQuestButtonsSection.getString("material").toString() + ".  Слот: " + infoQuestButtonsSection.getInt("slot"));
 
 
         final ConfigurationSection infoStatsButtonsSection = config.getConfigurationSection("gui.buttons.info-quest");
-        isSectionIsNull(infoStatsButtonsSection, "gui.info-stats");
+        isSectionIsNull(infoStatsButtonsSection, "gui.buttons.info-stats");
         Gui.InfoStatsButtons.slot = infoStatsButtonsSection.getInt("slot");
         Gui.InfoStatsButtons.material = Material.getMaterial(infoStatsButtonsSection.getString("material"));
 
-        final ConfigurationSection orangePanelButtonsSection = config.getConfigurationSection("gui.buttons.orange-panel");
-        isSectionIsNull(orangePanelButtonsSection, "gui.orange-panel");
+        final ConfigurationSection orangePanelButtonsSection = config.getConfigurationSection("gui.buttons.orangePanel");
+        isSectionIsNull(orangePanelButtonsSection, "gui.buttons.orangePanel");
         Gui.OrangePanel.material = Material.getMaterial(orangePanelButtonsSection.getString("material"));
         Gui.OrangePanel.slots = orangePanelButtonsSection.getIntegerList("slots");
 
-        final ConfigurationSection grayPanelButtonsSection = config.getConfigurationSection("gui.buttons.gray-panel");
-        isSectionIsNull(grayPanelButtonsSection, "gui.buttons.gray-panel");
+        final ConfigurationSection grayPanelButtonsSection = config.getConfigurationSection("gui.buttons.grayPanel");
+        isSectionIsNull(grayPanelButtonsSection, "gui.buttons.grayPanel");
         Gui.GrayPanel.material = Material.getMaterial(grayPanelButtonsSection.getString("material"));
         Gui.GrayPanel.slots = grayPanelButtonsSection.getIntegerList("slots");
     }
