@@ -6,17 +6,20 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.ItemStack;
 
 public class MainMenuListener implements Listener {
 
     @EventHandler
     public void onClickInventory(InventoryClickEvent e){
-        Player player = (Player) e.getWhoClicked();
-        Inventory inv = e.getClickedInventory();
-        InventoryHolder holder = inv.getHolder();
+        final Player player = (Player) e.getWhoClicked();
+        final Inventory inv = e.getClickedInventory();
+        final InventoryHolder holder = inv.getHolder();
+        final ItemStack item = e.getCurrentItem();
 
-        if(holder == null) return;
-        if(holder != null && inv != null){
+        if(holder == null || item == null || inv ==  null) return;
+
+        if(holder instanceof  MainMenuHolder && item != null){
             e.setCancelled(true);
         }
     }

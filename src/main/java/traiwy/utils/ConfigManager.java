@@ -31,10 +31,11 @@ public class ConfigManager {
         log.info("Предмет: " + infoQuestButtonsSection.getString("material").toString() + ".  Слот: " + infoQuestButtonsSection.getInt("slot"));
 
 
-        final ConfigurationSection infoStatsButtonsSection = config.getConfigurationSection("gui.buttons.info-quest");
+        final ConfigurationSection infoStatsButtonsSection = config.getConfigurationSection("gui.buttons.info-stats");
         isSectionIsNull(infoStatsButtonsSection, "gui.buttons.info-stats");
         Gui.InfoStatsButtons.slot = infoStatsButtonsSection.getInt("slot");
         Gui.InfoStatsButtons.material = Material.getMaterial(infoStatsButtonsSection.getString("material"));
+         log.info("Предмет: " + infoStatsButtonsSection.getString("material").toString() + ".  Слот: " + infoStatsButtonsSection.getInt("slot"));
 
         final ConfigurationSection orangePanelButtonsSection = config.getConfigurationSection("gui.buttons.orangePanel");
         isSectionIsNull(orangePanelButtonsSection, "gui.buttons.orangePanel");
@@ -66,6 +67,11 @@ public class ConfigManager {
             public static Material material;
             public static List<Integer> slots;
         }
+        public static class Quests{
+            public static String name;
+            public static List<String> lore;
+        }
+
     }
     public static void isSectionIsNull(ConfigurationSection configurationSection, String sections){
         if(sections == null) log.info("Sections : " + configurationSection + " not found");
