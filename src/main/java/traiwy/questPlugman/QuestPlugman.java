@@ -12,8 +12,9 @@ public final class QuestPlugman extends JavaPlugin {
     @Override
     public void onEnable() {
         saveDefaultConfig();
+        ConfigManager configManager = new ConfigManager();
         ConfigManager.loadConfig(getConfig());
-        final MainMenuHolder mainMenuHolder = new MainMenuHolder();
+        final MainMenuHolder mainMenuHolder = new MainMenuHolder( this, configManager);
         getCommand("mineskills").setExecutor(new CommandOpenMenu(mainMenuHolder));
         getServer().getPluginManager().registerEvents(new MainMenuListener(), this);
     }

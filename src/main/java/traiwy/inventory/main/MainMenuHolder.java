@@ -1,27 +1,38 @@
 package traiwy.inventory.main;
 
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import traiwy.utils.ConfigManager;
 
 import java.util.ArrayList;
+import java.util.List;
 
+
+@Slf4j
+@AllArgsConstructor
 public class MainMenuHolder implements InventoryHolder {
+    private final JavaPlugin plugin;
+    private final ConfigManager configManager;
     private final Inventory inventory = Bukkit.createInventory(this, 54, "Квестовик");
-
+    final List<ConfigManager.Gui.Quest> quests = ConfigManager.questsList;
 
     @Override
     public @NotNull Inventory getInventory() {
-
 
         final ItemStack grayPanel = new ItemStack(ConfigManager.Gui.GrayPanel.material);
         final ItemStack orangePanel = new ItemStack(ConfigManager.Gui.OrangePanel.material);
         final ItemStack infoQuest = new ItemStack(ConfigManager.Gui.InfoQuestButtons.material);
         final ItemStack infoStats = new ItemStack(ConfigManager.Gui.InfoStatsButtons.material);
+        final ItemStack questPanel = new ItemStack(ConfigManager.Gui.Quests.material);
 
 
         final ItemMeta meta = grayPanel.getItemMeta();
@@ -47,8 +58,25 @@ public class MainMenuHolder implements InventoryHolder {
             inventory.setItem(i, orangePanel);
         }
 
+        List<Integer> questsSlots = plugin.getConfig().getIntegerList("gui.quests.slots");
         inventory.setItem(ConfigManager.Gui.InfoQuestButtons.slot, infoQuest);
         inventory.setItem(ConfigManager.Gui.InfoStatsButtons.slot, infoStats);
+        for (int i = 0; i < questsSlots.size(); i++) {
+            if (i >= quests.size()) break;
+
+            int slot = questsSlots.get(i);
+            ConfigManager.Gui.Quest quest = quests.get(i);
+
+            ItemStack questItem = new ItemStack(ConfigManager.Gui.Quests.material);
+            ItemMeta questMeta = questItem.getItemMeta();
+            questMeta.setDisplayName(quest.getName());
+            questMeta.setLore(quest.getLore());
+            questItem.setItemMeta(questMeta);
+
+            inventory.setItem(slot, questItem);
+        }
         return inventory;
     }
+
 }
+
