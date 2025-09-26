@@ -8,16 +8,22 @@ version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+
     maven {
         name = "papermc-repo"
         url = "https://repo.papermc.io/repository/maven-public/"
     }
+
+    maven {
+        url = "https://jitpack.io"
+    }
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT")
+    compileOnly 'io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT'
     annotationProcessor("org.projectlombok:lombok:1.18.38")
     implementation("org.projectlombok:lombok:1.18.38")
+    implementation('com.github.Traiwy:libTraiwy:024d895')
 }
 
 tasks {

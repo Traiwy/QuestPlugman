@@ -1,0 +1,8 @@
+quest:
+  playerUUID:
+    name: ...
+    quests:
+      quest1:
+        status: ... #status: not-started / in-progress / completed
+        progress: ...  #Process in %
+        reward-claimed: ... #Get a reward
