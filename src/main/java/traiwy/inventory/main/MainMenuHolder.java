@@ -14,6 +14,7 @@ import traiwy.utils.ItemMetaManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 @Slf4j
@@ -22,7 +23,7 @@ public class MainMenuHolder implements InventoryHolder {
     private final JavaPlugin plugin;
     private final ConfigManager configManager;
     private final Inventory inventory = Bukkit.createInventory(this, 54, "Квестовик");
-    final List<ConfigManager.Gui.Quest> quests = ConfigManager.questsList;
+    final Map<String, ConfigManager.Gui.Quest> quests = ConfigManager.getQuestsList();
 
     @Override
     public @NotNull Inventory getInventory() {
@@ -46,16 +47,17 @@ public class MainMenuHolder implements InventoryHolder {
         List<Integer> questsSlots = plugin.getConfig().getIntegerList("gui.quests.slots");
         inventory.setItem(ConfigManager.Gui.InfoQuestButtons.slot, infoQuest);
         inventory.setItem(ConfigManager.Gui.InfoStatsButtons.slot, infoStats);
-        for (int i = 0; i < questsSlots.size(); i++) {
-            if (i >= quests.size()) break;
-
+        int i = 0;
+        for (Map.Entry<String, ConfigManager.Gui.Quest> entry : quests.entrySet()) {
+            if (i >= questsSlots.size()) break;
             int slot = questsSlots.get(i);
-            ConfigManager.Gui.Quest quest = quests.get(i);
 
-
+            ConfigManager.Gui.Quest quest = entry.getValue();
             ItemStack questItem = new ItemStack(ConfigManager.Gui.Quests.material);
             ItemMetaManager.applyMeta(questItem, quest.getName(), quest.getLore());
             inventory.setItem(slot, questItem);
+
+            i++;
         }
         return inventory;
     }

@@ -1,5 +1,6 @@
 package traiwy.utils;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -109,22 +110,11 @@ public class ConfigManager {
             public static Material material;
         }
 
+        @Getter
+        @AllArgsConstructor
         public static class Quest {
             private final String name;
             private final List<String> lore;
-
-            public Quest(String name, List<String> lore) {
-                this.name = name;
-                this.lore = lore;
-            }
-
-            public String getName() {
-                return name;
-            }
-
-            public List<String> getLore() {
-                return lore;
-            }
         }
 
     }
