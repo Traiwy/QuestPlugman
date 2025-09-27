@@ -1,15 +1,14 @@
 package traiwy.utils;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
-@Slf4j
 @AllArgsConstructor
 public class PlayersConfigManager {
     private final JavaPlugin plugin;
@@ -27,10 +26,15 @@ public class PlayersConfigManager {
         try{
             config.save(file);
         } catch (IOException e) {
-            log.warn(e.getMessage());
+            plugin.getLogger().warning(e.getMessage());
         }
     }
 
+    public void setQuestInformation(String name, UUID uuid, Status status, double progress, boolean reward, String quest){
+        ConfigManager.getQuestsList().forEach((name1, quest1) -> {
+
+        });
 
 
+    }
 }

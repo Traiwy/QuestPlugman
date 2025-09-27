@@ -1,5 +1,6 @@
 package traiwy.utils;
 
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -8,13 +9,17 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 public class ConfigManager {
+
     private static FileConfiguration config;
 
-    public static List<Gui.Quest> questsList = new ArrayList<>();
+    @Getter
+    private static Map<String, Gui.Quest> questsList = new HashMap();
     private final static Logger log = Bukkit.getLogger();
 
     public static void loadConfig(FileConfiguration file) {
@@ -68,7 +73,7 @@ public class ConfigManager {
                 String name = questInfoSection.getString("name");
                 List<String> lore = questInfoSection.getStringList("lore");
                 Gui.Quest quest = new Gui.Quest(name, lore);
-                questsList.add(quest);
+                questsList.put(questKey, quest);
             } else {
                 log.info("Секция:  " + questKey + " не найдена");
             }
