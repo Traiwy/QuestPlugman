@@ -76,7 +76,8 @@ public class MainMenuHolder implements InventoryHolder {
         return inventory;
     }
 
-    public void setQuestPanel(String questKey, UUID uuid) {
+    //Установка зеленой панели
+    public void updateQuestPanel(String questKey, UUID uuid) {
         int questNumber = Integer.parseInt(questKey.replace("quest", "")) - 1;
         List<Integer> questsSlots = plugin.getConfig().getIntegerList("gui.quests.slots");
         if (questNumber >= questsSlots.size()) return;
@@ -86,10 +87,12 @@ public class MainMenuHolder implements InventoryHolder {
         if (quest == null) return;
 
         Status status = playersConfigManager.getStatus(uuid, questKey);
-        boolean reward = playersConfigManager.isRewardClaimed(uuid, questKey);
 
         Material material = ConfigManager.Gui.Quests.material;
-        if (status == Status.IN_PROGRESS && reward) {
+
+        if (status == Status.COMPLETED) {
+            material = Material.ORANGE_STAINED_GLASS_PANE;
+        } else if (status == Status.IN_PROGRESS) {
             material = Material.LIME_STAINED_GLASS_PANE;
         }
 
@@ -97,26 +100,6 @@ public class MainMenuHolder implements InventoryHolder {
         ItemMetaManager.applyMeta(questItem, quest.getName(), quest.getLore());
         inventory.setItem(slot, questItem);
     }
-    public void setCompletedQuestPanel(String questKey, UUID uuid){
-        int questNumber = Integer.parseInt(questKey.replace("quest", "")) -1;
-        List<Integer> questsSlots = plugin.getConfig().getIntegerList("gui.quests.slots");
-        if (questNumber >= questsSlots.size()) return;
-        int slot = questsSlots.get(questNumber);
 
-        ConfigManager.Gui.Quest quest = quests.get(questKey);
-        if (quest == null) return;
-
-        Status status = playersConfigManager.getStatus(uuid, questKey);
-        boolean reward = playersConfigManager.isRewardClaimed(uuid, questKey);
-
-        Material material = ConfigManager.Gui.Quests.material;
-        if (status == Status.COMPLETED && reward) {
-            material = Material.ORANGE_STAINED_GLASS_PANE;
-        }
-
-        ItemStack questItem = new ItemStack(material);
-        ItemMetaManager.applyMeta(questItem, quest.getName(), quest.getLore());
-        inventory.setItem(slot, questItem);
-    }
 }
 

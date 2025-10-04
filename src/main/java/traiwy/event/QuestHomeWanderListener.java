@@ -53,7 +53,7 @@ public class QuestHomeWanderListener implements Listener {
                 player.sendMessage(ChatColor.GOLD + "§lКвест выполнен: §6Дом Странника");
                 player.sendMessage(ChatColor.GRAY + "Теперь у тебя есть своё убежище...");
                 playersConfigManager.setStatus(player.getUniqueId(), "quest1", Status.COMPLETED);
-                mainMenuHolder.setCompletedQuestPanel("quest1", player.getUniqueId());
+                mainMenuHolder.updateQuestPanel("quest1", player.getUniqueId());
             }
         }
     }

@@ -3,6 +3,7 @@ package traiwy.questPlugman;
 import org.bukkit.plugin.java.JavaPlugin;
 import traiwy.command.CommandOpenMenu;
 import traiwy.command.GetQuestCommand;
+import traiwy.command.SetQuestFirstJoinCommand;
 import traiwy.event.PlayerJoinListener;
 import traiwy.event.QuestHomeWanderListener;
 import traiwy.inventory.main.MainMenuHolder;
@@ -23,10 +24,9 @@ public final class QuestPlugman extends JavaPlugin {
         playersConfigManager.loadPlayersConfig();
         final MainMenuHolder mainMenuHolder = new MainMenuHolder(this, configManager, playersConfigManager);
 
-
-
-        getCommand("mineskills").setExecutor(new CommandOpenMenu(mainMenuHolder));
+        getCommand("mineskills").setExecutor(new CommandOpenMenu(mainMenuHolder, playersConfigManager));
         getCommand("quest").setExecutor(new GetQuestCommand(playersConfigManager));
+        getCommand("firstquest").setExecutor(new SetQuestFirstJoinCommand(playersConfigManager, mainMenuHolder));
         getServer().getPluginManager().registerEvents(new MainMenuListener(), this);
         getServer().getPluginManager().registerEvents(new QuestHomeWanderListener(playersConfigManager, mainMenuHolder), this);
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(playersConfigManager, mainMenuHolder), this);

@@ -7,12 +7,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.UUID;
 
 @AllArgsConstructor
 public class PlayersConfigManager {
     private final JavaPlugin plugin;
     private final ConfigManager configManager;
+    private final HashMap<String, Status> informationQuest = new HashMap<>();
 
     private File file;
     private FileConfiguration config;
@@ -32,6 +34,8 @@ public class PlayersConfigManager {
             plugin.getLogger().warning(e.getMessage());
         }
     }
+
+
 
     //Устанавливает информацию в конфиге
     public void setQuestInformation(UUID uuid, Status status, double progress, boolean rewardClaimed) {
@@ -79,4 +83,8 @@ public class PlayersConfigManager {
 
         savePlayersConfig();
     }
+   //public void setInformation(UUID uuid, Status status, String quest){
+   //    String path = "quest." + uuid + ".quests."
+
+   //}
 }

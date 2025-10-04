@@ -19,19 +19,19 @@ import java.util.UUID;
 @AllArgsConstructor
 public class CommandOpenMenu implements CommandExecutor {
     private final MainMenuHolder mainMenuHolder;
+    private final PlayersConfigManager playersConfigManager;
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if(!(commandSender instanceof Player player)) return false;
 
-        final Inventory inventory = mainMenuHolder.getInventory();
+        Inventory inventory = mainMenuHolder.getInventory();
         UUID uuid = player.getUniqueId();
+
         for (String questKey : mainMenuHolder.quests.keySet()) {
-            mainMenuHolder.setQuestPanel(questKey, uuid);
+            mainMenuHolder.updateQuestPanel(questKey, uuid);
         }
-        for (String questKey : mainMenuHolder.quests.keySet()) {
-            mainMenuHolder.setCompletedQuestPanel(questKey, uuid);
-        }
+
         player.openInventory(inventory);
         return true;
     }

@@ -7,3 +7,5 @@ commands:
     usage: mineskills
   quest:
     usage: quest
+  firstquest:
+    usage: firstquest

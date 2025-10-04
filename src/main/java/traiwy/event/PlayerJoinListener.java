@@ -21,9 +21,9 @@ public class PlayerJoinListener implements Listener {
         final UUID targetPlayer = player.getUniqueId();
 
         if (!player.hasPlayedBefore()) {
+            playersConfigManager.setQuestInformation(targetPlayer, Status.NOT_STARTED, 0.0, false);
             playersConfigManager.setStatus(targetPlayer, "quest1", Status.IN_PROGRESS);
-            playersConfigManager.setRewardClaimed(targetPlayer, "quest1", true);
-            mainMenuHolder.setQuestPanel("quest1", targetPlayer);
+            playersConfigManager.setRewardClaimed(targetPlayer, "quest1", false);
         }
     }
 }
